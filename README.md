@@ -1,5 +1,7 @@
 # Multi Currency support for Advanced Reporting  
 
+## DISCLAIMER: This is a proof-of-concept implementation, use at your own risk!
+
 This module enables multi currency support for the Magento Advanced Reporting.  
 
 The module adds reporting currency and exchange rates to the analytics settings.  

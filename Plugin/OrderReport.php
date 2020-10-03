@@ -92,10 +92,22 @@ class OrderReport
         return $this->iteratorFactory->create($statement, $this->getIteratorName($query));
     }
 
+    private function safeSql(array $params)
+    {
+        foreach ($params as $outerKey => $outerVal) {
+            foreach ($outerVal as $key => $val) {
+                $saveVal = preg_replace('/[^a-zA-Z0-9_ .-]/s', '', $val);
+                $params[$outerKey][$key] = $saveVal;
+            }
+        }
+
+        return $params;
+    }
+
     private function generateOrdersSql()
     {
         $reportingCurrency = $this->data->getReportingCurency();
-        $exchangeRates = $this->data->getExchangeRates();
+        $exchangeRates = $this->safeSql($this->data->getExchangeRates());
 
         $sql = "SELECT  entity_id,
                         created_at,
